@@ -281,7 +281,6 @@ function TelevisionPlayer() {
                 color: "#FFC62A",
               }}
             >
-              ▷ Student Showreel 2025
             </span>
             <span
               style={{
@@ -291,7 +290,6 @@ function TelevisionPlayer() {
                 color: "rgba(255,255,255,0.35)",
               }}
             >
-              Cohort 6
             </span>
           </div>
         </div>

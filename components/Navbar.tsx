@@ -70,7 +70,7 @@ export function Navbar() {
     const id = href.replace("#", "");
     const el = document.getElementById(id);
     if (el) {
-      const navHeight = isCompact ? 65 : 85;
+      const navHeight = isCompact ? 55 : 70;
       const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 16;
       window.scrollTo({ top, behavior: "smooth" });
     }
@@ -111,16 +111,21 @@ export function Navbar() {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10 flex items-center"
       >
-        <div className="w-full px-6 lg:px-10 flex items-center justify-between">
+        <div className="w-full px-6 lg:px-8 flex items-center justify-between">
           {/* LOGO — scrolls to top */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className={`font-black italic text-white transition-all duration-300 ${
-              isCompact ? "text-xl tracking-[2px]" : "text-2xl tracking-[4px]"
-            }`}
-          >
-            THE <span className="text-[#FFC62A]">ART</span> CODE
-          </button>
+<button
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  className="flex items-center gap-3 text-white transition-all duration-300"
+>
+  {/* LOGO */}
+  <img
+    src="/logo.png" // 🔥 put your logo in public folder
+    alt="logo"
+    className={`object-contain ${
+      isCompact ? "h-8" : "h-10"
+    }`}
+  />
+</button>
 
           <div className="flex items-center gap-6 lg:gap-10">
             {/* DESKTOP LINKS */}

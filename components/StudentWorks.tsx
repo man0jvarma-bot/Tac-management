@@ -1,18 +1,18 @@
 "use client";
 
 const topImages = [
-  "/works/1.jpg",
-  "/works/2.jpg",
+  "/works/mothish.jpeg",
+  "/works/nike.jpeg",
   "/works/3.jpg",
-  "/works/4.jpg",
+  "/works/vedam.jpg",
   "/works/5.jpg",
   "/works/6.jpg",
 ];
 
 const bottomImages = [
   "/works/7.jpg",
-  "/works/8.jpg",
-  "/works/9.jpg",
+  "/works/thumbnail.jpg",
+  "/works/image.png",
   "/works/10.jpg",
   "/works/11.jpg",
   "/works/12.jpg",
@@ -26,31 +26,39 @@ function ImageStrip({ images, direction = "left" }: any) {
       className="overflow-hidden w-full"
       style={{
         maskImage:
-          "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
+          "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
       }}
     >
       <div
         style={{
           display: "flex",
-          gap: "20px",
+          gap: "40px", // 🔥 more spacing
           width: "max-content",
-          animation: `${direction === "left" ? "scroll-left" : "scroll-right"} 25s linear infinite`,
+          alignItems: "center",
+          animation: `${
+            direction === "left" ? "scroll-left" : "scroll-right"
+          } 30s linear infinite`, // 🔥 smoother
         }}
       >
         {doubled.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt=""
-            style={{
-              width: "160px",
-              height: "100px",
-              objectFit: "cover",
-              borderRadius: "10px",
-              flexShrink: 0,
-              boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
-            }}
-          />
+<img
+  key={i}
+  src={src}
+  alt=""
+  style={{
+    maxHeight: "180px",   // 🔥 control size here (reduce/increase)
+    width: "auto",        // ✅ keeps natural width
+    height: "auto",
+    flexShrink: 0,
+    transition: "transform 0.35s ease",
+  }}
+  onMouseEnter={(e) =>
+    (e.currentTarget.style.transform = "scale(1.1)")
+  }
+  onMouseLeave={(e) =>
+    (e.currentTarget.style.transform = "scale(1)")
+  }
+  />
         ))}
       </div>
     </div>
@@ -59,31 +67,35 @@ function ImageStrip({ images, direction = "left" }: any) {
 
 export function StudentWorks() {
   return (
-    <section className="w-full py-20 bg-[#FBF8E4] text-[#1A1A1A] flex flex-col items-center gap-12">
+    <div className="w-full bg-[#FBF8E4] text-[#1A1A1A]">
+      
+      {/* ===== SECTION 1 ===== */}
+      <section className="w-full py-24 flex flex-col items-center gap-16">
+        
+        <h2
+          className="uppercase text-center"
+          style={{
+            fontFamily: "Bebas Neue",
+            fontSize: "80px", // 🔥 bigger title
+            letterSpacing: "1px",
+            fontWeight: 700,
+          }}
+        >
+          STUDENT WORKS
+        </h2>
 
-      {/* TITLE */}
-      <h2
-        className="uppercase text-center"
-        style={{
-          fontFamily: "Bebas Neue",
-          fontSize: "70px",
-          letterSpacing: "0.5px",
-          fontWeight: 700,
-          lineHeight: "72px",
-        }}
-      >
-        STUDENT WORKS
-      </h2>
+        <div className="w-[92%]">
+          <ImageStrip images={topImages} direction="left" />
+        </div>
+      </section>
 
-      {/* TOP STRIP */}
-      <div className="w-[90%]">
-        <ImageStrip images={topImages} direction="left" />
-      </div>
-
-      {/* BOTTOM STRIP */}
-      <div className="w-[90%]">
-        <ImageStrip images={bottomImages} direction="right" />
-      </div>
+      {/* ===== SECTION 2 ===== */}
+      <section className="w-full pb-24 flex flex-col items-center gap-16">
+        
+        <div className="w-[92%]">
+          <ImageStrip images={bottomImages} direction="right" />
+        </div>
+      </section>
 
       {/* KEYFRAMES */}
       <style>{`
@@ -97,7 +109,6 @@ export function StudentWorks() {
           to { transform: translateX(0); }
         }
       `}</style>
-
-    </section>
+    </div>
   );
 }
