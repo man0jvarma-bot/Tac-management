@@ -83,15 +83,27 @@ export function SkillsSection() {
   return (
     <section className="relative min-h-screen bg-[#FBF8E4] text-[#1D1D1D] px-[6%] py-24 overflow-hidden">
 
-      {/* 🔥 TAC (CORRECT POSITION) */}
+      {/* BACKGROUND TAC TEXT - INCREASED VISIBILITY WITH SHADOW */}
       <div className="absolute right-[6%] top-[90px] pointer-events-none z-0 text-right">
-        <h1 className="font-bebas text-[220px] leading-none text-[#1D1D1D]/5 select-none">
+        <h1 
+          className="font-bebas text-[220px] leading-none select-none"
+          style={{
+            color: "#1D1D1D",
+            opacity: 0.12,
+            textShadow: `
+              0 4px 8px rgba(31, 31, 31, 0.15),
+              0 8px 16px rgba(31, 31, 31, 0.1),
+              0 12px 24px rgba(255, 198, 42, 0.08)
+            `,
+            fontWeight: 700,
+          }}
+        >
           TAC
         </h1>
 
-        <p className="font-mono text-[10px] tracking-[3px] uppercase text-[#FFC62A]/80 -mt-6">
-          Creative. Practical. Industry Ready.
-        </p>
+<p className="font-mono text-[16px] tracking-[3px] uppercase text-[#1D1D1D]/80 -mt-8 font-bold">
+  Creative. Practical. Industry Ready.
+</p>
       </div>
 
       {/* HEADER */}
@@ -99,8 +111,7 @@ export function SkillsSection() {
 
         <div className="flex items-center gap-3 mb-5">
           <span className="w-10 h-[1.5px] bg-[#FFC62A]" />
-          <p className="font-mono text-[10px] tracking-[3px] text-[#FFC62A] uppercase font-bold">
-            Skill Stack
+         <p className="font-mono text-[16px] tracking-[3px] uppercase text-[#1D1D1D] -mt-8 font-bold">
           </p>
         </div>
 
@@ -129,7 +140,7 @@ export function SkillsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             whileHover={{ y: -8, scale: 1.02 }}
-            className="group relative bg-white p-8 rounded-3xl border border-[#1D1D1D]/5 shadow-md transition-all duration-300 cursor-default overflow-hidden"
+            className="group relative bg-white p-8 rounded-3xl border border-[#1D1D1D]/5 shadow-md hover:shadow-xl transition-all duration-300 cursor-default overflow-hidden"
           >
 
             {/* GLOW */}
@@ -155,26 +166,26 @@ export function SkillsSection() {
                 {skill.title}
               </h3>
 
-<p className="text-[12px] text-[#1D1D1D]/60 leading-relaxed group-hover:text-white/60 transition-colors duration-300 mb-4">
-  {skill.desc}
-</p>
+              <p className="text-[12px] text-[#1D1D1D]/60 leading-relaxed group-hover:text-white/60 transition-colors duration-300 mb-4">
+                {skill.desc}
+              </p>
 
-{/* TAGS */}
-<div className="flex flex-wrap gap-2 mb-4">
-  {skill.tags.map((tag, idx) => (
-    <span
-      key={idx}
-      className="text-[9px] font-mono tracking-[1.5px] px-2 py-1 border border-[#1D1D1D]/10 rounded-md text-[#1D1D1D]/60 group-hover:text-white/70 group-hover:border-white/20 transition"
-    >
-      {tag}
-    </span>
-  ))}
-</div>
+              {/* TAGS */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {skill.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="text-[9px] font-mono tracking-[1.5px] px-2 py-1 border border-[#1D1D1D]/10 rounded-md text-[#1D1D1D]/60 group-hover:text-white/70 group-hover:border-white/20 transition"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
-{/* BOTTOM STAT */}
-<p className="text-[10px] font-mono tracking-[2px] uppercase text-[#1D1D1D]/40 group-hover:text-white/40 transition">
-  {skill.stat}
-</p>
+              {/* BOTTOM STAT */}
+              <p className="text-[10px] font-mono tracking-[2px] uppercase text-[#1D1D1D]/40 group-hover:text-white/40 transition">
+                {skill.stat}
+              </p>
             </div>
 
           </motion.div>

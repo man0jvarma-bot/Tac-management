@@ -105,27 +105,27 @@ export function Navbar() {
           y: isVisible ? 0 : -120,
           height: isCompact ? 65 : 85,
           backgroundColor: isCompact
-            ? "rgba(0, 0, 0, 0.85)"
-            : "rgba(0, 0, 0, 0.4)",
+            ? "rgba(0, 0, 0, 0.95)"
+            : "rgba(0, 0, 0, 0.75)",
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10 flex items-center"
       >
         <div className="w-full px-6 lg:px-8 flex items-center justify-between">
           {/* LOGO — scrolls to top */}
-<button
-  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  className="flex items-center gap-3 text-white transition-all duration-300"
->
-  {/* LOGO */}
-  <img
-    src="/logo.png" // 🔥 put your logo in public folder
-    alt="logo"
-    className={`object-contain ${
-      isCompact ? "h-8" : "h-10"
-    }`}
-  />
-</button>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex items-center gap-3 text-white transition-all duration-300"
+          >
+            {/* LOGO */}
+            <img
+              src="/logo.png" // 🔥 put your logo in public folder
+              alt="logo"
+              className={`object-contain ${
+                isCompact ? "h-8" : "h-10"
+              }`}
+            />
+          </button>
 
           <div className="flex items-center gap-6 lg:gap-10">
             {/* DESKTOP LINKS */}
@@ -183,7 +183,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-[65px] left-0 w-full z-40 bg-black/95 backdrop-blur-xl border-b border-white/10 flex flex-col items-center gap-0 lg:hidden"
+            className="fixed top-[65px] left-0 w-full z-40 bg-black/85 backdrop-blur-xl border-b border-white/10 flex flex-col items-center gap-0 lg:hidden"
           >
             {NAV_LINKS.map(({ label, href }, i) => (
               <motion.a
@@ -193,7 +193,7 @@ export function Navbar() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.06 }}
-                className="w-full text-center py-5 text-[12px] tracking-[3px] uppercase font-bold text-white/70 hover:text-[#FFC62A] hover:bg-white/5 transition-colors border-b border-white/5"
+                className="w-full text-center py-5 text-[12px] tracking-[3px] uppercase font-bold text-white/90 hover:text-[#FFC62A] hover:bg-white/5 transition-colors border-b border-white/5"
               >
                 {label}
               </motion.a>

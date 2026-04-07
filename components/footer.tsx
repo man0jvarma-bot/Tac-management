@@ -79,8 +79,8 @@ export function Footer() {
         <p className="text-xs text-white/50 mb-1">
           Building creators into professionals — portfolio, job &amp; freelance ready.
         </p>
-        <a href="mailto:contact@theartcode.in" className="text-xs text-[#C9A227] hover:underline">
-          contact@theartcode.in
+        <a href="mailto:admissions@theartcode.org" className="text-xs text-[#C9A227] hover:underline">
+          admissions@theartcode.org
         </a>
       </div>
 

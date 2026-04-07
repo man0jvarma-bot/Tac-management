@@ -20,9 +20,9 @@ export function IndustriesSection() {
     <section className="bg-[#1A1A1A] text-[#f7f1e4] px-[6%] py-28">
 
       {/* TOP */}
-      <div className="grid md:grid-cols-2 gap-10 items-start mb-16">
+      <div className="grid md:grid-cols-2 gap-10 items-start mb-30">
         <div className="flex items-center">
-          <p className="text-[#f7f1e4]/60 text-sm max-w-sm leading-relaxed">
+          <p className="text-[#f7f1e4]/90 text-lg max-w-sm leading-relaxed">
             One project per industry. No repeats. That portfolio is what gets you the job or the client.
           </p>
         </div>

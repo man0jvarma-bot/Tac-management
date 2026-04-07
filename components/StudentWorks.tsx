@@ -621,7 +621,7 @@ export function StudentWorks() {
               margin: 0,
             }}
           >
-            Works made by our students
+            Recreated By Our Students
           </p>
         </div>
 

@@ -72,7 +72,7 @@ function BottomCarousel() {
 
 export function SimpleInfiniteCarousel() {
   return (
-    <section className="bg-[#FBF8E4] text-black py-24 overflow-hidden">
+    <section className="bg-[#FBF8E4] text-black py-12 overflow-hidden">
 
       {/* HEADER */}
       <div className="px-[5%] mb-16">

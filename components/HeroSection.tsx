@@ -452,12 +452,9 @@ export function HeroSection() {
             <div className="flex gap-4 flex-wrap">
               <button
                 onClick={() => setOpen(true)}
-                className="bg-[#1D1D1D] text-[#FBF8E4] px-10 py-4 text-[12px] font-bold tracking-[2px] uppercase hover:scale-105 transition"
+                className="bg-[#1D1D1D] text-[#FBF8E4] px-10 py-4 text-[12px] font-bold tracking-[2px] uppercase hover:scale-105 transition cursor-pointer"
               >
                 ENROLL IN NEXT COHORT
-              </button>
-              <button className="border border-[#1D1D1D]/20 px-10 py-4 text-[12px] tracking-[2px] uppercase text-[#1A1A1A]/70 hover:border-[#1A1A1A] hover:text-[#1A1A1A] transition">
-                GROW  WITH  TAC
               </button>
             </div>
 
