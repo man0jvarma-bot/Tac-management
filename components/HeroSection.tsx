@@ -1,10 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 /* ─── SCROLLING STRIPS DATA ──────────────────────────────── */
-// Top strip: student design/logo works (right-to-left)
 const topStripItems = [
   { label: "Brand Identity", color: "#FFC62A", icon: "◈" },
   { label: "Logo Design",    color: "#E8D5A0", icon: "⬡" },
@@ -18,7 +17,6 @@ const topStripItems = [
   { label: "IG Template",    color: "#E8D5A0", icon: "◉" },
 ];
 
-// Bottom strip: similar works (left-to-right)
 const bottomStripItems = [
   { label: "Product Shoot",   color: "#FFC62A", icon: "◎" },
   { label: "Reel Edit",       color: "#E8D5A0", icon: "▷" },
@@ -100,7 +98,6 @@ function InfiniteStrip({
 function TelevisionPlayer() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Scanline flicker effect
   const [flicker, setFlicker] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -194,7 +191,6 @@ function TelevisionPlayer() {
               "inset 0 0 0 2px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.6)",
           }}
         >
-          {/* Actual video */}
           <video
             ref={videoRef}
             autoPlay
@@ -305,7 +301,6 @@ function TelevisionPlayer() {
             paddingBottom: "4px",
           }}
         >
-          {/* Speaker grille dots */}
           {Array.from({ length: 12 }).map((_, i) => (
             <div
               key={i}
@@ -317,7 +312,6 @@ function TelevisionPlayer() {
               }}
             />
           ))}
-          {/* Center channel knob */}
           <div
             style={{
               width: "10px",
@@ -345,7 +339,6 @@ function TelevisionPlayer() {
 
       {/* ── TV NECK + BASE ── */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        {/* Neck */}
         <div
           style={{
             width: "60px",
@@ -354,7 +347,6 @@ function TelevisionPlayer() {
             clipPath: "polygon(20% 0%, 80% 0%, 90% 100%, 10% 100%)",
           }}
         />
-        {/* Base */}
         <div
           style={{
             width: "200px",
@@ -367,7 +359,6 @@ function TelevisionPlayer() {
         />
       </div>
 
-      {/* ─── Keyframe injection ─── */}
       <style>{`
         @keyframes led-pulse {
           0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(74,222,128,0.8); }
@@ -388,84 +379,302 @@ function TelevisionPlayer() {
 
 /* ─── HERO SECTION ───────────────────────────────────────── */
 export function HeroSection() {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    age: "",
+    qualification: "",
+  });
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    // Simulate API call — replace with your actual endpoint
+    await new Promise((res) => setTimeout(res, 1400));
+    setLoading(false);
+    setSubmitted(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ name: "", email: "", phone: "", age: "", qualification: "" });
+    }, 300);
+  };
+
   return (
-  <section
-  className="min-h-screen bg-[#FBF8E4] text-[#1A1A1A] flex pt-[70px] overflow-x-hidden"
-  style={{ marginLeft: "-1px" }}
->
+    <>
+      <section
+        className="min-h-screen bg-[#FBF8E4] text-[#1A1A1A] flex pt-[70px] overflow-x-hidden"
+        style={{ marginLeft: "-1px" }}
+      >
+        {/* ══ LEFT CONTENT ══ */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center px-[6%]">
 
-      {/* ══ LEFT CONTENT ══ */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center px-[6%]">
+          <p className="font-mono text-[10px] tracking-[3px] uppercase text-[#1A1A1A]/40 mb-6 flex items-center gap-4">
+            <span className="w-10 h-[1px] bg-[#FFC62A] block" />
+            THE ART CODE — MADHAPUR, HYDERABAD
+          </p>
 
-        <p className="font-mono text-[10px] tracking-[3px] uppercase text-[#1A1A1A]/40 mb-6 flex items-center gap-4">
-          <span className="w-10 h-[1px] bg-[#FFC62A] block" />
-          THE ART CODE — MADHAPUR, HYDERABAD
-        </p>
+          <h1 className="leading-[1.0] font-black tracking-tight uppercase">
+            <span className="block text-[50px] md:text-[75px]">LEARN</span>
+            <span className="block text-[50px] md:text-[75px] text-[#FFC62A]">8 SKILLS.</span>
+            <span className="block text-[50px] md:text-[75px] text-transparent" style={{ WebkitTextStroke: "1.5px rgba(26,26,26,0.2)" }}>
+              ONE COURSE.
+            </span>
+          </h1>
 
-        <h1 className="leading-[1.0] font-black tracking-tight uppercase">
-          <span className="block text-[50px] md:text-[75px]">LEARN</span>
-          <span className="block text-[50px] md:text-[75px] text-[#FFC62A]">8 SKILLS.</span>
-          <span className="block text-[50px] md:text-[75px] text-transparent" style={{ WebkitTextStroke: "1.5px rgba(26,26,26,0.2)" }}>
-            ONE COURSE.
-          </span>
-        </h1>
+          <p className="mt-6 text-[#1A1A1A]/60 max-w-md text-[15px] leading-[1.8] font-medium">
+            India's first 8-in-1 creative suite program. Shoot content. Design brands.
+            Edit reels. Land jobs. Crack freelance gigs. Build your ₹1L/month career.
+          </p>
 
-        <p className="mt-6 text-[#1A1A1A]/60 max-w-md text-[15px] leading-[1.8] font-medium">
-          India's first 8-in-1 creative suite program. Shoot content. Design brands.
-          Edit reels. Land jobs. Crack freelance gigs. Build your ₹1L/month career.
-        </p>
+          <div className="flex flex-col gap-10 mt-10">
+            <div className="flex gap-4 flex-wrap">
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-[#1D1D1D] text-[#FBF8E4] px-10 py-4 text-[12px] font-bold tracking-[2px] uppercase hover:scale-105 transition"
+              >
+                ENROLL IN NEXT COHORT
+              </button>
+              <button className="border border-[#1D1D1D]/20 px-10 py-4 text-[12px] tracking-[2px] uppercase text-[#1A1A1A]/70 hover:border-[#1A1A1A] hover:text-[#1A1A1A] transition">
+                GROW  WITH  TAC
+              </button>
+            </div>
 
-        <div className="flex flex-col gap-10 mt-10">
-          <div className="flex gap-4 flex-wrap">
-            <button className="bg-[#1D1D1D] text-[#FBF8E4] px-10 py-4 text-[12px] font-bold tracking-[2px] uppercase hover:scale-105 transition">
-              ENROLL IN NEXT COHORT
-            </button>
-            <button className="border border-[#1D1D1D]/20 px-10 py-4 text-[12px] tracking-[2px] uppercase text-[#1A1A1A]/70 hover:border-[#1A1A1A] hover:text-[#1A1A1A] transition">
-              SEE PLACEMENT STORIES
-            </button>
-          </div>
+            {/* STATS */}
+            <div className="flex items-center gap-6 md:gap-8 border-t border-[#1D1D1D]/10 pt-8 max-w-xl">
+              {[
+                { val: "5",    label: "Cohorts Done" },
+                { val: "₹30K", label: "Avg Package" },
+                { val: "10",   label: "Portfolio" },
+                { val: "8",    label: "Skills" },
+              ].map((s, i) => (
+                <li key={s.label} className="flex items-center gap-6 md:gap-8">
+                  <div className="flex flex-col">
+                    <span className="text-[32px] md:text-[40px] font-black leading-none text-[#FFC62A]">
+                      {s.val}
+                    </span>
+                    <span className="text-[8px] md:text-[9px] tracking-[2px] uppercase font-bold text-[#1A1A1A]/40 mt-1">
+                      {s.label}
+                    </span>
+                  </div>
 
-          {/* STATS */}
-          <div className="flex items-center gap-6 md:gap-8 border-t border-[#1D1D1D]/10 pt-8 max-w-xl">
-            {[
-              { val: "5",    label: "Cohorts Done" },
-              { val: "₹30K", label: "Avg Package" },
-              { val: "10",   label: "Portfolio" },
-              { val: "8",    label: "Skills" },
-            ].map((s, i) => (
-              <>
-                <div key={s.label} className="flex flex-col">
-                  <span className="text-[32px] md:text-[40px] font-black leading-none text-[#FFC62A]">{s.val}</span>
-                  <span className="text-[8px] md:text-[9px] tracking-[2px] uppercase font-bold text-[#1A1A1A]/40 mt-1">{s.label}</span>
-                </div>
-                {i < 3 && <div className="w-[1px] h-10 bg-[#1D1D1D]/10" />}
-              </>
-            ))}
+                  {i < 3 && <div className="w-[1px] h-10 bg-[#1D1D1D]/10" />}
+                </li>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* ══ RIGHT: TV + STRIPS ══ */}
-      <div className="hidden lg:flex flex-col justify-center items-center w-full lg:w-1/2 shrink-0 gap-8">
+        {/* ══ RIGHT: TV + STRIPS ══ */}
+        <div className="hidden lg:flex flex-col justify-center items-center w-full lg:w-1/2 shrink-0 gap-8">
 
-        {/* TOP STRIP — right to left */}
-        <InfiniteStrip items={topStripItems} direction="left" speed={30} />
+          {/* TOP STRIP — right to left */}
+          <InfiniteStrip items={topStripItems} direction="left" speed={30} />
 
-        {/* TELEVISION */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="px-2"
-        >
-          <TelevisionPlayer />
-        </motion.div>
+          {/* TELEVISION */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="px-2"
+          >
+            <TelevisionPlayer />
+          </motion.div>
 
-        {/* BOTTOM STRIP — left to right */}
-        <InfiniteStrip items={bottomStripItems} direction="right" speed={28} />
+          {/* BOTTOM STRIP — left to right */}
+          <InfiniteStrip items={bottomStripItems} direction="right" speed={28} />
 
-      </div>
+        </div>
+      </section>
 
-    </section>
+      {/* ───────── APPLY MODAL ───────── */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-md p-4"
+            onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
+          >
+            <motion.div
+              initial={{ scale: 0.92, y: 24, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.92, y: 24, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="bg-[#FBF8E4] text-[#1A1A1A] w-full max-w-md p-8 rounded-lg shadow-2xl relative"
+            >
+              <button
+                onClick={closeModal}
+                aria-label="Close modal"
+                className="absolute top-4 right-4 text-black/40 hover:text-black text-xl leading-none transition-colors"
+              >
+                ✕
+              </button>
+
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="text-center py-10"
+                  >
+                    <div className="text-5xl mb-4">🎉</div>
+                    <h2 className="text-3xl font-black mb-3 tracking-wide">
+                      You&apos;re In!
+                    </h2>
+                    <p className="text-sm text-black/60 leading-relaxed">
+                      Application received! We&apos;ll reach out shortly.
+                      <br />
+                      Please check your email.
+                    </p>
+                    <button
+                      onClick={closeModal}
+                      className="mt-8 bg-[#1D1D1D] text-white px-10 py-3 text-[11px] font-bold tracking-[2px] uppercase hover:bg-black transition-all active:scale-95"
+                    >
+                      CLOSE
+                    </button>
+                  </motion.div>
+                ) : (
+                  <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <h2 className="text-2xl font-black mb-1 tracking-wide">
+                      APPLY NOW
+                    </h2>
+                    <p className="text-xs text-black/50 mb-6 tracking-wide uppercase">
+                      Fill in your details to get started
+                    </p>
+
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                      <input
+                        required
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Full Name"
+                        className="modal-input"
+                      />
+                      <input
+                        required
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email Address"
+                        className="modal-input"
+                      />
+                      <input
+                        required
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Phone Number"
+                        pattern="[0-9+\-\s]{7,15}"
+                        title="Enter a valid phone number"
+                        className="modal-input"
+                      />
+                      <div className="flex gap-4">
+                        <input
+                          required
+                          name="age"
+                          type="number"
+                          min={15}
+                          max={60}
+                          value={formData.age}
+                          onChange={handleChange}
+                          placeholder="Age"
+                          className="modal-input w-1/3"
+                        />
+                        <input
+                          required
+                          name="qualification"
+                          value={formData.qualification}
+                          onChange={handleChange}
+                          placeholder="Qualification"
+                          className="modal-input w-2/3"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="relative bg-[#1D1D1D] text-white py-4 text-sm font-bold tracking-[2px] uppercase mt-2 hover:bg-black transition-all active:scale-95 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden"
+                      >
+                        <AnimatePresence mode="wait">
+                          {loading ? (
+                            <motion.span
+                              key="loading"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              className="flex items-center justify-center gap-2"
+                            >
+                              <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                              Submitting...
+                            </motion.span>
+                          ) : (
+                            <motion.span
+                              key="idle"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                            >
+                              Submit Application
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                      </button>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style jsx>{`
+        .modal-input {
+          border: 1px solid rgba(0, 0, 0, 0.12);
+          padding: 0.75rem 1rem;
+          font-size: 0.875rem;
+          background: white;
+          outline: none;
+          transition: border-color 0.2s, box-shadow 0.2s;
+          border-radius: 2px;
+          width: 100%;
+        }
+        .modal-input:focus {
+          border-color: #ffc62a;
+          box-shadow: 0 0 0 3px rgba(255, 198, 42, 0.15);
+        }
+        .modal-input::placeholder {
+          color: rgba(0, 0, 0, 0.35);
+        }
+      `}</style>
+    </>
   );
 }
